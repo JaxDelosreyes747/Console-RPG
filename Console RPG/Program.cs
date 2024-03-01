@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Threading;
 
 namespace Console_RPG
 {
@@ -6,7 +8,44 @@ namespace Console_RPG
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Test");
+            Console.WriteLine("Please name YOUR MII!");
+            string name1 = Console.ReadLine();
+            Player.player1.name = name1;
+            Thread.Sleep(1000);
+            Console.WriteLine(" ");
+
+            Console.WriteLine("Please name YOUR COMPANION'S MII!");
+            string name2 = Console.ReadLine();
+            Player.player2.name = name2;
+            Thread.Sleep(1000);
+            Console.WriteLine(" ");
+
+            Console.WriteLine("...");
+            Thread.Sleep(1000);
+            Console.WriteLine(" ");
+            Console.WriteLine("...");
+            Thread.Sleep(1000);
+            Console.WriteLine(" ");
+            Console.WriteLine("...");
+            Thread.Sleep(1000);
+            Console.WriteLine(" ");
+            Console.WriteLine("Ah...Is that...a beach?...");
+            Thread.Sleep(2000);
+            Console.WriteLine(" ");
+
+            Location.beach.SetNearbyLocations(east: Location.mystery);
+            Location.mystery.SetNearbyLocations(south: Location.plains);
+            Location.plains.SetNearbyLocations(south: Location.greenhorneEntrance);
+            Location.greenhorneEntrance.SetNearbyLocations(east: Location.greenhorneTown);
+            Location.greenhorneTown.SetNearbyLocations(north: Location.greenhorneInn, south: Location.greenhorneCafe, west: Location.easinHillsBattle);
+            Location.greenhorneInn.SetNearbyLocations(north: Location.greenhorneInnDesk);
+            Location.easinHillsBattle.SetNearbyLocations(north: Location.strangeGrove, south: Location.riverdeepCavern, west: Location.seasideBeach);
+            Location.riverdeepCavern.SetNearbyLocations(south: Location.riverdeepCavernBattle);
+            Location.riverdeepCavernBattle.SetNearbyLocations(east: Location.riverdeepCavernGrotto, south: Location.castleView);
+
+
+            Location.beach.Resolve(new List<Player>() {Player.player1, Player.player2});
+
         }
     }
 }
