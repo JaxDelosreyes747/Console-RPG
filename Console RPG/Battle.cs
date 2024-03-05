@@ -3,24 +3,23 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using System.Threading;
+using System.Drawing;
 
 namespace Console_RPG
 {
-    class Battle
+    class Battle : LocationFeature
     {
         public bool battleAgain;
-        public bool isResolved;
         public List<Enemy> enemies;
 
 
-        public Battle(List<Enemy> enemies, bool battleAgain = false)
+        public Battle(List<Enemy> enemies, bool battleAgain = false) : base(false)
         {
             this.battleAgain = battleAgain;
-            this.isResolved = false;
             this.enemies = enemies;
         }
 
-        public bool Resolve(List<Player> players)
+        public override bool Resolve(List<Player> players)
         {
             if (isResolved == true)
             {

@@ -8,7 +8,8 @@ namespace Console_RPG
     class Player : Entity
     {
 
-        public static List<Item> Inventory = new List<Item>() { Item.potion1 };
+        public static List<Item> Inventory = new List<Item>() { Item.healthPotion1 };
+        public static int CoinCount = 0;
 
         public static Player player1 = new Player(name: "", hp: 20, mana: 30, new Stats(strength: 200, defense: 2, maxhp: 20, maxmana: 30), level: 1, currentexp: 0);
         public static Player player2 = new Player(name: "", hp: 20, mana: 30, new Stats(strength: 200, defense: 2, maxhp: 20, maxmana: 30), level: 1, currentexp: 0);

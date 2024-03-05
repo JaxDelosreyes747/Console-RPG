@@ -6,7 +6,17 @@ namespace Console_RPG
 {
     abstract class Item
     {
-        public static Item potion1 = new HealthPotionItem("Health Potion", "Yummy", 10, 1, 10);
+
+        public static Item water = new Water("Water", "Water!", 10, 5, 10);
+
+        public static Item weirdPotion1 = new WeirdPotionHealItem("Weird Potion", "It kind of smells funny...", 10, 5, 10);
+        public static Item weirdPotion2 = new WeirdPotionDamageItem("Weird Potion", "It kind of smells funny...", 10, 5, 10);
+
+        public static Item healthPotion1 = new HealthPotionItem("Health Potion", "Yummy", 10, 2, 10);
+        public static Item megaHealthPotion1 = new HealthPotionItem("Mega Health Potion", "Yummy", 10, 2, 25);
+        public static Item ultraHealthPotion1 = new HealthPotionItem("Ultra Health Potion", "Yummy", 10, 2, 50);
+        public static Item manaPotion1 = new ManaPotionItem("Standard Ether Potion", "Yummy", 10, 2, 5);
+        
 
         public string name;
         public string description;
@@ -22,6 +32,55 @@ namespace Console_RPG
         }
 
         public abstract void Use(Entity user, Entity target);
+    }
+
+    class Water : Item
+    {
+        public int happiness;
+        public Water(string name, string description, int shopPrice, int maxAmount, int happiness) : base(name, description, shopPrice, maxAmount)
+        {
+            this.happiness = happiness;
+        }
+
+        public override void Use(Entity user, Entity target)
+        {
+            Console.WriteLine(target.name + " got water. They gained " + this.happiness + " amount of happiness!");
+            Console.WriteLine(" ");
+        }
+    }
+
+    class WeirdPotionHealItem : Item
+    {
+        public int healAmount;
+
+        public WeirdPotionHealItem(string name, string description, int shopPrice, int maxAmount, int healAmount) : base(name, description, shopPrice, maxAmount)
+        {
+            this.healAmount = healAmount;
+        }
+
+        public override void Use(Entity user, Entity target)
+        {
+            user.currentHP += this.healAmount;
+            Console.WriteLine(target.name + " used a Weird Potion and felt great! They healed for " + this.healAmount + "!");
+            Console.WriteLine(" ");
+        }
+    }
+
+    class WeirdPotionDamageItem : Item
+    {
+        public int damageAmount;
+
+        public WeirdPotionDamageItem(string name, string description, int shopPrice, int maxAmount, int damageAmount) : base(name, description, shopPrice, maxAmount)
+        {
+            this.damageAmount = damageAmount;
+        }
+
+        public override void Use(Entity user, Entity target)
+        {
+            user.currentHP += this.damageAmount;
+            Console.WriteLine(target.name + " used a Weird Potion and...bleugh! Is that poison?! They were damaged for " + this.damageAmount + "!");
+            Console.WriteLine(" ");
+        }
     }
 
     class HealthPotionItem : Item
@@ -69,54 +128,4 @@ namespace Console_RPG
             target.currentHP -= this.damage;
         }
     }
-
-    class Weapon : Item
-    {
-        public int damage;
-
-        public Weapon(string name, string description, int shopPrice, int maxAmount, int damage) : base(name, description, shopPrice, maxAmount)
-        {
-            this.damage = damage;
-        }
-
-        public override void Use(Entity user, Entity target)
-        {
-            target.currentHP -= this.damage;
-        }
-    }
-    class Sword : Weapon
-    {
-        public Sword(string name, string description, int shopPrice, int maxAmount, int damage) : base(name, description, shopPrice, maxAmount, damage)
-        {
-   
-        }
-
-        public override void Use(Entity user, Entity target)
-        {
-            target.currentHP -= (this.damage + user.stats.strength) - target.stats.defense;
-        }
-    }
-
-    class Wand : Weapon
-    {
-        public int manaUsed;
-
-        public Wand(string name, string description, int shopPrice, int maxAmount, int damage, int manaUsed) : base(name, description, shopPrice, maxAmount, damage)
-        {
-            this.manaUsed = manaUsed;
-        }
-
-        public override void Use(Entity user, Entity target)
-        {
-            target.currentHP -= this.damage;
-
-            if (user.currentMana == 0)
-                return;
-
-            user.currentMana -= this.manaUsed;
-
-        }
-    }
-
-
 }

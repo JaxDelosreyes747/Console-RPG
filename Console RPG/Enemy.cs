@@ -12,6 +12,7 @@ namespace Console_RPG
         public static Enemy goblin = new Enemy(name: "Goblin", hp: 40, mana: 10, new Stats(strength: 6, defense: 4, maxhp: 40, maxmana: 10), coinsDroppedOnDefeated: 25, experiencePointsOnDefeated: 25);
         public static Enemy imp = new Enemy(name: "Imp", hp: 75, mana: 40, new Stats(strength: 2, defense: 15, maxhp: 75, maxmana: 40), coinsDroppedOnDefeated: 50, experiencePointsOnDefeated: 50);
         public static Enemy ironMaiden = new Enemy(name: "Iron Maiden", hp: 75, mana: 0, new Stats(strength: 15, defense: 0, maxhp: 75, maxmana: 0), coinsDroppedOnDefeated: 50, experiencePointsOnDefeated: 50);
+        public static Enemy weepingWillow = new Enemy(name: "Weeping Willow", hp: 150, mana: 60, new Stats(strength: 10, defense: 20, maxhp: 150, maxmana: 0), coinsDroppedOnDefeated: 75, experiencePointsOnDefeated: 75);
 
         public int coinsDroppedOnDefeated;
         public int experiencePointsOnDefeated;
