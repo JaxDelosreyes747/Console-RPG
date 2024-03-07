@@ -4,6 +4,7 @@ using System.Text;
 using System.Linq;
 using System.Threading;
 using System.Drawing;
+using System.Numerics;
 
 namespace Console_RPG
 {
@@ -35,6 +36,7 @@ namespace Console_RPG
                     if (player.currentHP > 0)
                     {
                         Console.WriteLine("It's " + player.name + "'s turn!");
+                        Console.WriteLine($"Your health is at {player.currentHP}!");
                         player.DoTurn(players, enemies);
                     }
                     else
@@ -72,21 +74,21 @@ namespace Console_RPG
                 //If all the enemies die...
                 if (enemies.TrueForAll(enemy => enemy.currentHP <= 0))
                 {
-                    Console.WriteLine($"Whoo! You survived");
-                    Console.WriteLine($"You won [] coins!");
-                    Console.WriteLine($"You won [] of experience points!");
-                    Console.WriteLine(" ");
 
                     foreach (var enemy in enemies)
                     {
                         Player.player1.currentExp += enemy.experiencePointsOnDefeated;
                         Player.player1.LevelUp();
-                        Console.WriteLine(" ");
-                        Thread.Sleep(1000);
                         Player.player2.currentExp += enemy.experiencePointsOnDefeated;
                         Player.player2.LevelUp();
-                        Console.WriteLine(" ");
+                        Player.CoinCount += enemy.coinsDroppedOnDefeated;
                     }
+
+                    Console.WriteLine($"Whoo! You survived");
+                    Console.WriteLine($"{Player.player1.name} now has {Player.player1.currentExp} experience points!");
+                    Console.WriteLine($"{Player.player2.name} now has {Player.player2.currentExp} experience points!");
+                    Console.WriteLine($"You now have {Player.CoinCount} Derek Dollars!");
+                    Console.WriteLine(" ");
 
                     Thread.Sleep(1000);
 

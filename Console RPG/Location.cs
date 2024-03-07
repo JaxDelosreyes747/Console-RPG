@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading;
@@ -24,7 +25,7 @@ namespace Console_RPG
         public static Location castleTown = new Location("Castle Town", "The town is bussling with citizens chatting with one another. They all seem wary of the recent events happening in Greenhorne...");
 
         //shops
-        public static Location greenhorneInnShop = new Location("Greenhorne Inn Shop", "A cute little shop...the owner keeps saying 'bee bop bee bo'...", new Shop("Ybot", "Greenhorne Inn Shop", new List<Item>() { Item.healthPotion1 }, "Uhhh...I can't think right now what to say to you"));
+        public static Location greenhorneInnShop = new Location("Greenhorne Inn Shop", "A cute little shop...the owner keeps saying 'bee bop bee bo'...", new Shop("Ybot", "Greenhorne Inn Shop", new List<Item>() { Item.healthPotion1, Item.dagger }, "Uhhh...I can't think right now what to say to you"));
         public static Location castleTownMarket = new Location("Castle Town Market", "A cute little shop...the owner keeps saying 'bee bop bee bo'...", new Shop("Mongus", "Castle Town Market", new List<Item>() { Item.healthPotion1 }, "Impasta"));
 
         //inns
@@ -40,7 +41,7 @@ namespace Console_RPG
         public static Location seasideBeach = new Location("Seaside Beach", "A warm and beautifully sandy beach...", new Event("Beach"));
 
         //battles
-        public static Location easinHillsBattle = new Location("Easin Hills", "A wide open field full of lush grass...and monsters apparently", new Battle(new List<Enemy>() { Enemy.imp }, false));
+        public static Location easinHillsBattle = new Location("Easin Hills", "A wide open field full of lush grass...and monsters apparently", new Battle(new List<Enemy>() { Enemy.imp }, true));
         public static Location riverdeepCavernBattle = new Location("Riverdeep Inner Lake", "Oh man, that lake is almost...eerily deep...With your proportions, it would be a death sentence to try and swim", new Battle(new List<Enemy>() { Enemy.imp }, false));
         public static Location castleBattle = new Location("Castle: Hallway", "AGH! It seems like the castle has been ambushed...", new Battle(new List<Enemy>() { Enemy.imp }, false));
         public static Location aridFrontierbattle = new Location("Arid Frontier", "The wind is howling right next to your ears. Looking down, it's a long way to the bottom of the cliff...", new Battle(new List<Enemy>() { Enemy.imp }, false));
@@ -117,6 +118,7 @@ namespace Console_RPG
             Thread.Sleep(1000);
             Console.WriteLine(this.description);
             Thread.Sleep(1000);
+            Console.WriteLine(" ");
 
             if (!(north is null))
                 Console.WriteLine("North: " + this.north.name);
@@ -129,6 +131,10 @@ namespace Console_RPG
 
             if (!(west is null))
                 Console.WriteLine("West: " + this.west.name);
+
+            Console.WriteLine(" ");
+            Console.WriteLine("Type [Inventory] to access Inventory!");
+            Console.WriteLine(" ");
 
             string choice = Console.ReadLine();
             Console.WriteLine(" ");
@@ -165,59 +171,101 @@ namespace Console_RPG
 
         public static void CheckInventory(Player player)
         {
-            List<Player> playerChoice = new List<Player>() {player};
+            List<Player> playerChoice = new List<Player>() {Player.player1, Player.player2};
             while (true)
             {
                 Console.WriteLine("What would you like to do?");
-                Console.WriteLine("Use Item (Item) | Equip Equipment (Equip) | Check Stats (Stats)");
+                Console.WriteLine("Use Item [Item] | Equip Equipment [Equip] | Check Stats [Stats] | Check Wallet [Wallet] | Leave");
                 string choice = Console.ReadLine();
+                Console.WriteLine(" ");
 
                 if (choice == "Item")
                 {
                     if (Player.Inventory.Count == 0)
                     {
                         Console.WriteLine("You have nothing in your inventory");
+                        Console.WriteLine(" ");
                     }
                     else
                     {
                         Item item = Player.player1.ChooseItem(Player.Inventory);
-                        Entity target = Player.player1.ChooseTarget(playerChoice);
+                        Entity target = Player.player1.ChooseTarget(playerChoice.Cast<Entity>().ToList());
                         item.Use(player, target);
                         Player.Inventory.Remove(item);
                     }
                 }
                 else if (choice == "Equip")
                 {
-                    //equipment
+                    if (Player.EquipmentInventory.Count == 0)
+                    {
+                        Console.WriteLine("You have nothing in your weapon inventory");
+                        Console.WriteLine(" ");
+                    }
+                    else
+                    {
+                        Equipment equipment = Player.ChooseEquipment(Player.EquipmentInventory);
+                        Entity target = Player.player1.ChooseTarget(playerChoice.Cast<Entity>().ToList());
+                        if (equipment.isEquipped == false)
+                        {
+                            equipment.Equip(player);
+                        }
+                        else if (equipment.isEquipped == true)
+                        {
+                            equipment.UnEquip(player);
+                        }
+                        
+                    }
                 }
                 else if (choice == "Stats")
                 {
                     Console.WriteLine("Whos stats do you want to check?");
                     Console.WriteLine($"{Player.player1.name}'s Stats | {Player.player2.name}'s Stats");
                     string statsChoice = Console.ReadLine();
+                    Console.WriteLine(" ");
 
-                    if(statsChoice == Player.player1.name)
+                    if (statsChoice == Player.player1.name)
                     {
                         Console.WriteLine($"Here is {Player.player1.name}'s stats ");
                         Console.WriteLine(" ");
                         Console.WriteLine($"Level: {Player.player1.level}");
-                        Console.WriteLine($"Current EXP: {Player.player1.currentExp}");
+                        Console.WriteLine("Current EXP: " + Player.player1.currentExp + "/" + Player.player1.level * 100);
                         Console.WriteLine($"Current HP: {Player.player1.currentHP} / {Player.player1.stats.maxHP}");
                         Console.WriteLine($"Current Mana: {Player.player1.currentMana} / {Player.player1.stats.maxMana}");
                         Console.WriteLine($"Strength: {Player.player1.stats.strength}");
                         Console.WriteLine($"Defense: {Player.player1.stats.defense}");
+                        Console.WriteLine(" ");
                     }
-                    if (statsChoice == Player.player2.name)
+                    else if (statsChoice == Player.player2.name)
                     {
                         Console.WriteLine($"Here is {Player.player2.name}'s stats ");
                         Console.WriteLine(" ");
                         Console.WriteLine($"Level: {Player.player2.level}");
-                        Console.WriteLine($"Current EXP: {Player.player2.currentExp}");
+                        Console.WriteLine("Current EXP: " + Player.player2.currentExp + "/" + Player.player2.level * 100);
                         Console.WriteLine($"Current HP: {Player.player2.currentHP} / {Player.player2.stats.maxHP}");
                         Console.WriteLine($"Current Mana: {Player.player2.currentMana} / {Player.player2.stats.maxMana}");
                         Console.WriteLine($"Strength: {Player.player2.stats.strength}");
                         Console.WriteLine($"Defense: {Player.player2.stats.defense}");
+                        Console.WriteLine(" ");
                     }
+                    else
+                    {
+                        Console.WriteLine("I don't think this person exists (in this world at least)...please try again!");
+                        Console.WriteLine(" ");
+                    }
+                }
+                else if (choice == "Wallet")
+                {
+                    Console.WriteLine($"You have {Player.CoinCount} Derek Dollars in your wallet!");
+                    Console.WriteLine(" ");
+                }
+                else if (choice == "Leave")
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Whoops! Try typing the command again!");
+                    CheckInventory(player);
                 }
             }
         }

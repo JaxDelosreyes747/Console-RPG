@@ -16,6 +16,10 @@ namespace Console_RPG
             this.rarity = rarity;
             this.isEquipped = false;
         }
+
+        public abstract void Equip(Entity user);
+
+        public abstract void UnEquip(Entity user);
     }
 
     class Armor : Equipment
@@ -27,21 +31,23 @@ namespace Console_RPG
             this.defense = defense;
         }
 
+        public override void Equip(Entity user)
+        {
+            user.armor = this;
+            this.isEquipped = true;
+            int modifier = user.stats.defense += this.defense;
+            Console.WriteLine($"{user.name} equipped {this.name} and your defense is at {modifier}!");
+        }
+
+        public override void UnEquip(Entity user)
+        {
+            this.isEquipped = false;
+            int modifier = user.stats.defense -= this.defense;
+            Console.WriteLine($"{user.name} unequipped {this.name} and your defense is back down to {modifier}!");
+        }
         public override void Use(Entity user, Entity target)
         {
-            // Flip the value of whether or not it's equipped
-            this.isEquipped = !this.isEquipped;
 
-            if (this.isEquipped)
-            {
-                //increase the targets defense if they equip the item
-                target.stats.defense += this.defense;
-            }
-            else
-            {
-                //increase the targets defense if they deequip the item
-                target.stats.defense -= this.defense;
-            }
         }
     }
 
@@ -54,20 +60,34 @@ namespace Console_RPG
             this.damage = damage;
         }
 
+        public override void Equip(Entity user)
+        {
+
+            this.isEquipped = true;
+            //increase the targets defense if they equip the item
+            int modifier = user.stats.strength += this.damage;
+            Console.WriteLine($"{user.name} equipped {this.name} and can now attack at {modifier} points of damage!");
+            Console.WriteLine(" ");
+        }
+
+        public override void UnEquip(Entity user)
+        {
+            this.isEquipped = false;
+            //increase the targets defense if they deequip the item
+            int modifier = user.stats.strength -= this.damage;
+            Console.WriteLine($"{user.name} unequipped {this.name} and your attack is back down to {modifier}!");
+            Console.WriteLine(" ");
+        }
+
+
         public override void Use(Entity user, Entity target)
         {
-            // Flip the value of whether or not it's equipped
-            this.isEquipped = !this.isEquipped;
+            this.durability = this.durability -= 0.5f;
 
-            if (this.isEquipped)
+            if (this.durability < 0 )
             {
-                //increase the targets defense if they equip the item
-                target.stats.strength += this.damage;
-            }
-            else
-            {
-                //increase the targets defense if they deequip the item
-                target.stats.strength -= this.damage;
+                Console.WriteLine($"{this.name} has broken!");
+                Player.Inventory.Remove(this);
             }
         }
     }

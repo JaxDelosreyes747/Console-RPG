@@ -55,7 +55,7 @@ namespace Console_RPG
             Location.nightmareTower4.SetNearbyLocations(north: Location.nightmareTowerFinal);
 
 
-            Location.seasideBeach.Resolve(new List<Player>() {Player.player1, Player.player2});
+            Location.easinHillsBattle.Resolve(new List<Player>() {Player.player1, Player.player2});
 
         }
     }

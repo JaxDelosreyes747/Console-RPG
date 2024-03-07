@@ -128,7 +128,7 @@ namespace Console_RPG
                 }
                 else if (userInput == "Leave")
                 {
-                    Location.greenhorneTown.Resolve(players);
+                    Location.castleTavern.Resolve(players);
                 }
                 else
                 {
@@ -154,7 +154,7 @@ namespace Console_RPG
                 }
                 else if (userInput == "Leave")
                 {
-                    Location.riverdeepCavernGrotto.Resolve(players);
+                    Location.easinHillsBattle.Resolve(players);
                 }
                 else
                 {

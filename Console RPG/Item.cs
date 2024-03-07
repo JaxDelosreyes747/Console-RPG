@@ -7,16 +7,22 @@ namespace Console_RPG
     abstract class Item
     {
 
+        // Extras
         public static Item water = new Water("Water", "Water!", 10, 5, 10);
+        public static Item weirdPotion1 = new WeirdPotionHealItem("Weird Potion", "It kind of smells funny...", 10, 5, 15);
+        public static Item weirdPotion2 = new WeirdPotionDamageItem("Weird Potion", "It kind of smells funny...", 10, 5, 15);
 
-        public static Item weirdPotion1 = new WeirdPotionHealItem("Weird Potion", "It kind of smells funny...", 10, 5, 10);
-        public static Item weirdPotion2 = new WeirdPotionDamageItem("Weird Potion", "It kind of smells funny...", 10, 5, 10);
-
+        // Potions
         public static Item healthPotion1 = new HealthPotionItem("Health Potion", "Yummy", 10, 2, 10);
         public static Item megaHealthPotion1 = new HealthPotionItem("Mega Health Potion", "Yummy", 10, 2, 25);
         public static Item ultraHealthPotion1 = new HealthPotionItem("Ultra Health Potion", "Yummy", 10, 2, 50);
         public static Item manaPotion1 = new ManaPotionItem("Standard Ether Potion", "Yummy", 10, 2, 5);
-        
+
+        //Weapons
+        public static Equipment dagger = new Weapon("Dagger", "Sharp", 10, 5, 0.5f, 1, 10);
+
+        //Armor
+
 
         public string name;
         public string description;

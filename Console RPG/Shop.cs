@@ -37,7 +37,7 @@ namespace Console_RPG
                     Player.CoinCount -= item.shopPrice;
                     Player.Inventory.Add(item);
 
-                    Console.WriteLine($"You bought a {item.name}!");
+                    Console.WriteLine($"You bought a {item.name} for {item.shopPrice} Derek Dollars!");
                     Console.WriteLine(" ");
                 }
                 else if (userInput == "Sell")
@@ -51,7 +51,7 @@ namespace Console_RPG
                 }
                 else if (userInput == "Wallet")
                 {
-                    Console.WriteLine($"You have {Player.CoinCount} in your wallet!");
+                    Console.WriteLine($"You have {Player.CoinCount} Derek Dollars in your wallet!");
                     Console.WriteLine(" ");
                 }
                 else if (userInput == "Leave")
@@ -65,7 +65,7 @@ namespace Console_RPG
                 }
             }
 
-            Console.WriteLine("See ya later");
+            Console.WriteLine("You left the shop...");
 
             return true;
         }
@@ -76,7 +76,7 @@ namespace Console_RPG
             // Iterate through each of the choices
             for (int i = 0; i < choices.Count; i++)
             {
-                Console.WriteLine($"{i + 1}: {choices[i].name} (${choices[i].shopPrice} coins)");
+                Console.WriteLine($"{i + 1}: {choices[i].name}. {choices[i].description} ({choices[i].shopPrice} Derek Dollars)");
             }
 
             // Let user pick a choice
@@ -84,7 +84,7 @@ namespace Console_RPG
             if (index > choices.Count || index < 0)
             {
                 Console.WriteLine("You look around and say something that the owner doesn't understand. You should probably pick something that they have!");
-                return ChooseItem(choices);
+                ChooseItem(choices);
             }
 
             return choices[index - 1];
