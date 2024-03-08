@@ -29,7 +29,9 @@ namespace Console_RPG
             {
                 Console.WriteLine("What would you like to do?");
                 Console.WriteLine("Buy | Sell | Check Wallet (Wallet) | Leave");
+                Console.WriteLine(" ");
                 string userInput = Console.ReadLine();
+                Console.WriteLine(" ");
 
                 if (userInput == "Buy")
                 {

@@ -29,6 +29,8 @@ namespace Console_RPG
 
             while (true)
             {
+                Console.WriteLine("You've run into a battle!");
+                Console.WriteLine(" ");
                 // Run this code on each of the players
                 foreach (var player in players)
                 {

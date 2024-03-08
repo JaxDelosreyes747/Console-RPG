@@ -9,24 +9,22 @@ namespace Console_RPG
     class Player : Entity
     {
 
-        public static List<Item> Inventory = new List<Item>() { Item.healthPotion1};
-        public static List<Equipment> EquipmentInventory = new List<Equipment>() { Equipment.dagger};
+        public static List<Item> Inventory = new List<Item>() {};
+        public static List<Equipment> EquipmentInventory = new List<Equipment>() {};
         public static int CoinCount = 0;
 
-        public static Player player1 = new Player(name: "", hp: 20, mana: 30, new Stats(strength: 200, defense: 2, maxhp: 20, maxmana: 30), level: 1, currentexp: 0, spellstrength: 20);
-        public static Player player2 = new Player(name: "", hp: 20, mana: 30, new Stats(strength: 200, defense: 2, maxhp: 20, maxmana: 30), level: 1, currentexp: 0, spellstrength: 20);
+        public static Player player1 = new Player(name: "", hp: 20, mana: 30, new Stats(strength: 5, defense: 2, maxhp: 20, maxmana: 30, spellstrength: 20), level: 1, currentexp: 0);
+        public static Player player2 = new Player(name: "", hp: 20, mana: 30, new Stats(strength: 5, defense: 2, maxhp: 20, maxmana: 30, spellstrength: 20), level: 1, currentexp: 0);
         
         public int level;
         public int currentExp;
-        public int spellStrength;
 
-        public Stats levelUpIncrease = new Stats(3, 2, 10, 5);
+        public Stats levelUpIncrease = new Stats(3, 2, 10, 5, 5);
 
-        public Player(string name, int hp, int mana, Stats stats, int level, int currentexp, int spellstrength) : base(name, hp, mana, stats)
+        public Player(string name, int hp, int mana, Stats stats, int level, int currentexp) : base(name, hp, mana, stats)
         {
             this.level = level;
             this.currentExp = currentexp;
-            this.spellStrength = spellstrength;
         }
 
         public void LevelUp()
@@ -118,35 +116,67 @@ namespace Console_RPG
         public override void Attack(Entity target, Entity user)
         {
             int strengthTotalDamage = (this.stats.strength - target.stats.defense);
-            target.currentHP -= strengthTotalDamage;
-            Console.WriteLine(" ");
-            Console.WriteLine(this.name + " attacked " + target.name + " for " + strengthTotalDamage + "points of damage!");
-            Console.WriteLine(" ");
+
+            if (strengthTotalDamage > 0)
+            {
+                target.currentHP -= strengthTotalDamage;
+                Console.WriteLine(" ");
+                Console.WriteLine(this.name + " attacked " + target.name + " for " + strengthTotalDamage + "points of damage!");
+                Console.WriteLine(" ");
+            }
+            else
+            {
+                target.currentHP -= 0;
+                Console.WriteLine(" ");
+                Console.WriteLine("You did not do any damage!");
+                Console.WriteLine(" ");
+            }
         }
 
         public override void Spell(Entity target, Entity user)
         {
             int strengthTotalDamage = (this.stats.strength - target.stats.defense);
-            int spellTotalDamage = (this.spellStrength / 2);
-            target.currentHP -= spellTotalDamage;
-            target.currentHP -= strengthTotalDamage;
-            int mana = this.stats.maxMana - 1;
+            int spellTotalDamage = (this.stats.spellStrength / 2);
+            int mana = this.stats.maxMana - 30;
             this.currentMana = mana;
 
             if (mana > 0)
             {
-                Console.WriteLine(" ");
-                Console.WriteLine(this.name + " attacked " + target.name + " for " + spellTotalDamage + "points of spell damage!");
-                Console.WriteLine(" ");
-                Console.WriteLine($"{this.name}'s mana is at {this.currentMana}");
+                if (spellTotalDamage > 0)
+                {
+                    target.currentHP -= spellTotalDamage;
+                    Console.WriteLine(" ");
+                    Console.WriteLine(this.name + " attacked " + target.name + " for " + spellTotalDamage + "points of spell damage!");
+                    Console.WriteLine(" ");
+                    Console.WriteLine($"{this.name}'s mana is at {this.currentMana}");
+                }
+                else
+                {
+                    target.currentHP -= 0;
+                    Console.WriteLine(" ");
+                    Console.WriteLine("You did not do any damage!");
+                    Console.WriteLine(" ");
+                }
+               
             }
             else
             {
-                Console.WriteLine("Oops! You've run out of mana!");
-                Console.WriteLine("You attack normally!");
-                Console.WriteLine(" ");
-                Console.WriteLine(this.name + " attacked " + target.name + " for " + strengthTotalDamage + "points of damage!");
-                Console.WriteLine(" ");
+                if (strengthTotalDamage > 0)
+                {
+                    target.currentHP -= strengthTotalDamage;
+                    Console.WriteLine("Oops! You've run out of mana!");
+                    Console.WriteLine("You attack normally!");
+                    Console.WriteLine(" ");
+                    Console.WriteLine(this.name + " attacked " + target.name + " for " + strengthTotalDamage + "points of damage!");
+                    Console.WriteLine(" ");
+                }
+                else
+                {
+                    target.currentHP -= 0;
+                    Console.WriteLine(" ");
+                    Console.WriteLine("You did not do any damage!");
+                    Console.WriteLine(" ");
+                }
             }
         }
         public override void DoTurn(List<Player> players, List<Enemy> enemies)
@@ -154,12 +184,14 @@ namespace Console_RPG
             Console.WriteLine("What would you like to do?");
             Console.WriteLine("Attack | Item");
             string choice = Console.ReadLine();
+            Console.WriteLine(" ");
 
             if (choice == "Attack")
             {
                 Console.WriteLine("What would you like to use?");
                 Console.WriteLine("Strength | Spell");
                 string attackChoice = Console.ReadLine();
+                Console.WriteLine(" ");
 
                 if (attackChoice == "Strength")
                 {
@@ -174,6 +206,7 @@ namespace Console_RPG
                 else
                 {
                     Console.WriteLine("That can't be used to defeat the enemy...Try again!");
+                    Console.WriteLine(" ");
                     DoTurn(players, enemies);
                 }
 

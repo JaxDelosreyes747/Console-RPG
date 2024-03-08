@@ -25,8 +25,8 @@ namespace Console_RPG
         public static Location castleTown = new Location("Castle Town", "The town is bussling with citizens chatting with one another. They all seem wary of the recent events happening in Greenhorne...");
 
         //shops
-        public static Location greenhorneInnShop = new Location("Greenhorne Inn Shop", "A cute little shop...the owner keeps saying 'bee bop bee bo'...", new Shop("Ybot", "Greenhorne Inn Shop", new List<Item>() { Item.healthPotion1, Item.dagger }, "Uhhh...I can't think right now what to say to you"));
-        public static Location castleTownMarket = new Location("Castle Town Market", "A cute little shop...the owner keeps saying 'bee bop bee bo'...", new Shop("Mongus", "Castle Town Market", new List<Item>() { Item.healthPotion1 }, "Impasta"));
+        public static Location greenhorneInnShop = new Location("Greenhorne Inn Shop", "A cute little shop...the owner keeps saying 'bee bop bee bo'...", new Shop("Ybot", "Greenhorne Inn Shop", new List<Item>() { Item.healthPotion1, Item.manaPotion1, Item.dagger, Item.wand, Item.chainmail, Item.robes }, "Uhhh...I can't think right now what to say to you"));
+        public static Location castleTownMarket = new Location("Castle Town Market", "A cute little shop...the owner keeps saying 'bee bop bee bo'...", new Shop("Mongus", "Castle Town Market", new List<Item>() { Item.megaHealthPotion1, Item.megaManaPotion1, Item.sword, Item.staff, Item.ironArmor, Item.fancyRobes}, "Impasta"));
 
         //inns
         public static Location greenhorneInn = new Location("Greenhorne Inn", "Hmm...it seems like this is a little inn...At least you can rest now...You can probably ask what happened at the information desk");
@@ -41,18 +41,17 @@ namespace Console_RPG
         public static Location seasideBeach = new Location("Seaside Beach", "A warm and beautifully sandy beach...", new Event("Beach"));
 
         //battles
-        public static Location easinHillsBattle = new Location("Easin Hills", "A wide open field full of lush grass...and monsters apparently", new Battle(new List<Enemy>() { Enemy.imp }, true));
-        public static Location riverdeepCavernBattle = new Location("Riverdeep Inner Lake", "Oh man, that lake is almost...eerily deep...With your proportions, it would be a death sentence to try and swim", new Battle(new List<Enemy>() { Enemy.imp }, false));
-        public static Location castleBattle = new Location("Castle: Hallway", "AGH! It seems like the castle has been ambushed...", new Battle(new List<Enemy>() { Enemy.imp }, false));
-        public static Location aridFrontierbattle = new Location("Arid Frontier", "The wind is howling right next to your ears. Looking down, it's a long way to the bottom of the cliff...", new Battle(new List<Enemy>() { Enemy.imp }, false));
+        public static Location easinHillsBattle = new Location("Easin Hills", "A wide open field full of lush grass...and monsters apparently", new Battle(new List<Enemy>() { Enemy.slime, Enemy.slime2, Enemy.slime3}, true));
+        public static Location riverdeepCavernBattle = new Location("Riverdeep Inner Lake", "Oh man, that lake is almost...eerily deep...With your proportions, it would be a death sentence to try and swim", new Battle(new List<Enemy>() {Enemy.slime4, Enemy.goblin, Enemy.goblin2 }, true));
+        public static Location castleBattle = new Location("Castle: Hallway", "AGH! It seems like the castle has been ambushed...", new Battle(new List<Enemy>() { Enemy.goblin3, Enemy.imp2, Enemy.imp3 }, true));
+        public static Location aridFrontierbattle = new Location("Arid Frontier", "The wind is howling right next to your ears. Looking down, it's a long way to the bottom of the cliff...", new Battle(new List<Enemy>() {Enemy.ironMaiden, Enemy.ironMaiden2, Enemy.weepingWillow}, true));
 
         //final level
         public static Location nightmareTowerEntrance = new Location("Nightmare Tower: Entrance", "So this is where the dark lord lives...");
-        public static Location nightmareTower = new Location("Nightmare Tower: Ground Level", "Eek! This place is crawling with monsters...Let's be careful scaling it...", new Battle(new List<Enemy>() { Enemy.slime }, false));
-        public static Location nightmareTower2 = new Location("Nightmare Tower: Level 2", "Woah, the monsters grow in power with each level! Be careful...", new Battle(new List<Enemy>() { Enemy.slime }, false));
-        public static Location nightmareTower3 = new Location("Nightmare Tower: Level 3", "It's getting a bit tall...and dark...I hope you aren't afraid of heights...", new Battle(new List<Enemy>() { Enemy.slime }, false));
-        public static Location nightmareTower4 = new Location("Nightmare Tower: Level 4", "It seems you're close to reaching the top! Keep going, you're almost there! I can sense the darkness...", new Battle(new List<Enemy>() { Enemy.slime }, false));
-        public static Location nightmareTowerFinal = new Location("Nightmare Tower: Top Level", "It seems you're close to reaching the top! Keep going, you're almost there! I can sense the darkness...", new Battle(new List<Enemy>() { Enemy.slime }, false));
+        public static Location nightmareTower = new Location("Nightmare Tower: Ground Level", "Eek! This place is crawling with monsters...Let's be careful scaling it...", new Battle(new List<Enemy>() { Enemy.slime5, Enemy.goblin4, Enemy.imp4 }, false));
+        public static Location nightmareTower2 = new Location("Nightmare Tower: Level 2", "Woah, the monsters grow in power with each level! Be careful...", new Battle(new List<Enemy>() { Enemy.imp5, Enemy.ironMaiden3, Enemy.weepingWillow2 }, false));
+        public static Location nightmareTower3 = new Location("Nightmare Tower: Level 3", "It seems you're close to reaching the top! Keep going, you're almost there! I can sense the darkness...The final battle...", new Battle(new List<Enemy>() { Enemy.ironMaiden5, Enemy.weepingWillow3, Enemy.weepingWillow4}, false));
+        public static Location nightmareTowerFinal = new Location("Nightmare Tower: Top Level", "You stand at the top...it's a long way down. You've finally won...", new Battle(new List<Enemy>() {Enemy.ironMaiden5, Enemy.weepingWillow5, Enemy.darkLord}, false));
 
         static Location checkpoint;
         

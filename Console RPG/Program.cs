@@ -33,11 +33,12 @@ namespace Console_RPG
             Thread.Sleep(2000);
             Console.WriteLine(" ");
 
-            Location.beach.SetNearbyLocations(east: Location.greenhorneInnShop);
+            Location.beach.SetNearbyLocations(east: Location.plains);
             Location.plains.SetNearbyLocations(south: Location.greenhorneEntrance);
-            Location.greenhorneEntrance.SetNearbyLocations(east: Location.greenhorneTown);
+            Location.greenhorneEntrance.SetNearbyLocations(east: Location.greenhorneTownSquare);
+            Location.greenhorneTownSquare.SetNearbyLocations(south: Location.greenhorneInn);
             Location.greenhorneTown.SetNearbyLocations(north: Location.greenhorneInn, south: Location.greenhorneCafe, west: Location.easinHillsBattle);
-            Location.greenhorneInn.SetNearbyLocations(north: Location.greenhorneInnDesk);
+            Location.greenhorneInn.SetNearbyLocations(north: Location.greenhorneInnDesk, west: Location.greenhorneInnShop);
             Location.easinHillsBattle.SetNearbyLocations(north: Location.strangeGrove, south: Location.riverdeepCavern, west: Location.seasideBeach);
             Location.riverdeepCavern.SetNearbyLocations(south: Location.riverdeepCavernBattle);
             Location.riverdeepCavernBattle.SetNearbyLocations(east: Location.riverdeepCavernGrotto, south: Location.castleView);
@@ -51,11 +52,10 @@ namespace Console_RPG
             Location.nightmareTowerEntrance.SetNearbyLocations(south: Location.nightmareTower);
             Location.nightmareTower.SetNearbyLocations(west: Location.nightmareTower2);
             Location.nightmareTower2.SetNearbyLocations(south: Location.nightmareTower3);
-            Location.nightmareTower3.SetNearbyLocations(east: Location.nightmareTower4);
-            Location.nightmareTower4.SetNearbyLocations(north: Location.nightmareTowerFinal);
+            Location.nightmareTower3.SetNearbyLocations(east: Location.nightmareTowerFinal);
 
 
-            Location.easinHillsBattle.Resolve(new List<Player>() {Player.player1, Player.player2});
+            Location.beach.Resolve(new List<Player>() {Player.player1, Player.player2});
 
         }
     }

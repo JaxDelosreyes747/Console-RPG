@@ -7,13 +7,15 @@
         public int defense;
         public int maxHP;
         public int maxMana;
+        public int spellStrength;
 
-        public Stats(int strength, int defense, int maxhp, int maxmana)
+        public Stats(int strength, int defense, int maxhp, int maxmana, int spellstrength)
         {
             this.strength = strength;
             this.defense = defense;
             this.maxHP = maxhp;
             this.maxMana = maxmana;
+            this.spellStrength = spellstrength;
         }
     }
 }

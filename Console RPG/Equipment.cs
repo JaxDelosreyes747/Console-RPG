@@ -51,6 +51,45 @@ namespace Console_RPG
         }
     }
 
+    class MagicWeapon : Equipment
+    {
+        public int damage;
+
+        public MagicWeapon(string name, string description, int shopPrice, int sellPrice, float durability, float rarity, int damage) : base(name, description, shopPrice, sellPrice, durability, rarity)
+        {
+            this.damage = damage;
+        }
+
+        public override void Equip(Entity user)
+        {
+
+            this.isEquipped = true;
+            //increase the targets defense if they equip the item
+            int modifier = user.stats.spellStrength += this.damage;
+            Console.WriteLine($"{user.name} equipped {this.name} and can now attack at {modifier} points of damage!");
+            Console.WriteLine(" ");
+        }
+
+        public override void UnEquip(Entity user)
+        {
+            this.isEquipped = false;
+            //increase the targets defense if they deequip the item
+            int modifier = user.stats.spellStrength -= this.damage;
+            Console.WriteLine($"{user.name} unequipped {this.name} and your attack is back down to {modifier}!");
+            Console.WriteLine(" ");
+        }
+        public override void Use(Entity user, Entity target)
+        {
+            this.durability = this.durability -= 0.5f;
+
+            if (this.durability < 0)
+            {
+                Console.WriteLine($"{this.name} has broken!");
+                Player.Inventory.Remove(this);
+            }
+        }
+    }
+
     class Weapon : Equipment
     {
         public int damage;
@@ -79,12 +118,11 @@ namespace Console_RPG
             Console.WriteLine(" ");
         }
 
-
         public override void Use(Entity user, Entity target)
         {
             this.durability = this.durability -= 0.5f;
 
-            if (this.durability < 0 )
+            if (this.durability < 0)
             {
                 Console.WriteLine($"{this.name} has broken!");
                 Player.Inventory.Remove(this);

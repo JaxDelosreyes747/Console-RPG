@@ -14,15 +14,33 @@ namespace Console_RPG
 
         // Potions
         public static Item healthPotion1 = new HealthPotionItem("Health Potion", "Yummy", 10, 2, 10);
+        public static Item healthPotion2 = new HealthPotionItem("Health Potion", "Yummy", 10, 2, 10);
+        public static Item healthPotion3 = new HealthPotionItem("Health Potion", "Yummy", 10, 2, 10);
         public static Item megaHealthPotion1 = new HealthPotionItem("Mega Health Potion", "Yummy", 10, 2, 25);
-        public static Item ultraHealthPotion1 = new HealthPotionItem("Ultra Health Potion", "Yummy", 10, 2, 50);
+        public static Item megaHealthPotion2 = new HealthPotionItem("Mega Health Potion", "Yummy", 10, 2, 25);
+        public static Item megaHealthPotion3 = new HealthPotionItem("Mega Health Potion", "Yummy", 10, 2, 25);
+
         public static Item manaPotion1 = new ManaPotionItem("Standard Ether Potion", "Yummy", 10, 2, 5);
+        public static Item manaPotion2 = new ManaPotionItem("Standard Ether Potion", "Yummy", 10, 2, 5);
+        public static Item manaPotion3 = new ManaPotionItem("Standard Ether Potion", "Yummy", 10, 2, 5);
+        public static Item megaManaPotion1 = new ManaPotionItem("Mega Ether Potion", "Yummy", 25, 2, 25);
+        public static Item megaManaPotion2 = new ManaPotionItem("Mega Ether Potion", "Yummy", 25, 2, 25);
+        public static Item megaManaPotion3 = new ManaPotionItem("Mega Ether Potion", "Yummy", 25, 2, 25);
 
         //Weapons
-        public static Equipment dagger = new Weapon("Dagger", "Sharp", 10, 5, 0.5f, 1, 10);
+        public static Equipment dagger = new Weapon("Dagger", "Sharp...ish", 20, 5, 0.5f, 1, 10);
+        public static Equipment sword = new Weapon("Sword", "Sharp enough!", 100, 5, 0.5f, 1, 25);
+        public static Equipment wand = new MagicWeapon("Wand", "It mostly works", 20, 5, 0.5f, 1, 10);
+        public static Equipment staff = new MagicWeapon("Staff", "Wow! Crystal", 100, 5, 0.5f, 1, 25);
+
+        public static Equipment godSword = new Weapon("God Sword", "Don't use unless you really need to... [Easy Mode]", 20, 5, 0.5f, 1, 100);
+        public static Equipment godSword2 = new Weapon("God Sword 2", "Don't use unless you really need to...", 20, 5, 0.5f, 1, 100);
 
         //Armor
-
+        public static Equipment chainmail = new Armor("Chainmail", "There's a lot of holes, but it's better than nothing", 10, 5, 0.5f, 1, 10);
+        public static Equipment ironArmor = new Armor("Iron Armor", "Woo. Shiny!", 10, 5, 0.5f, 1, 20);
+        public static Equipment robes = new Armor("Robes", "It's too big for you, but it works", 10, 5, 0.5f, 1, 10);
+        public static Equipment fancyRobes = new Armor("Sorcerers Robes", "It's quite fancy", 10, 5, 0.5f, 1, 20);
 
         public string name;
         public string description;
