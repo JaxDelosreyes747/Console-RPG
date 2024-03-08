@@ -25,8 +25,8 @@ namespace Console_RPG
         public static Location castleTown = new Location("Castle Town", "The town is bussling with citizens chatting with one another. They all seem wary of the recent events happening in Greenhorne...");
 
         //shops
-        public static Location greenhorneInnShop = new Location("Greenhorne Inn Shop", "A cute little shop...the owner keeps saying 'bee bop bee bo'...", new Shop("Ybot", "Greenhorne Inn Shop", new List<Item>() { Item.healthPotion1, Item.manaPotion1, Item.dagger, Item.wand, Item.chainmail, Item.robes }, "Uhhh...I can't think right now what to say to you"));
-        public static Location castleTownMarket = new Location("Castle Town Market", "A cute little shop...the owner keeps saying 'bee bop bee bo'...", new Shop("Mongus", "Castle Town Market", new List<Item>() { Item.megaHealthPotion1, Item.megaManaPotion1, Item.sword, Item.staff, Item.ironArmor, Item.fancyRobes}, "Impasta"));
+        public static Location greenhorneInnShop = new Location("Greenhorne Inn Shop", "A cute little shop...the owner keeps saying 'bee bop bee bo'...", new Shop("Ybot", "Greenhorne Inn Shop", new List<Item>() { Item.healthPotion1, Item.manaPotion1, Item.healthPotion2, Item.manaPotion2, Item.healthPotion3, Item.manaPotion3, Item.dagger, Item.wand, Item.chainmail, Item.robes }, "Uhhh...I can't think right now what to say to you"));
+        public static Location castleTownMarket = new Location("Castle Town Market", "Mongus", new Shop("Mongus", "Castle Town Market", new List<Item>() { Item.megaHealthPotion1, Item.megaManaPotion1, Item.megaHealthPotion2, Item.megaManaPotion2, Item.megaHealthPotion3, Item.megaManaPotion3, Item.sword, Item.staff, Item.ironArmor, Item.fancyRobes}, "Impasta"));
 
         //inns
         public static Location greenhorneInn = new Location("Greenhorne Inn", "Hmm...it seems like this is a little inn...At least you can rest now...You can probably ask what happened at the information desk");

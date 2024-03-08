@@ -62,7 +62,7 @@ namespace Console_RPG
 
                 if (userInput == "Fish")
                 {
-                    Item item = ChooseItem(new List<Item>() { Item.healthPotion1, Item.manaPotion1 });
+                    Item item = ChooseItem(new List<Item>() { Item.healthPotionr, Item.manaPotionr, Item.healthPotionrr, Item.manaPotionrr, Item.healthPotionrrr, Item.manaPotionrrr, });
                     Player.Inventory.Add(item);
 
                     Console.WriteLine("You and " + Player.player2.name + " pick up the fishing rod and begin to fish. One of you reels up something from the water...it's...an item! Well...a sopping wet and covered in seagrass item...");
@@ -144,7 +144,7 @@ namespace Console_RPG
 
                 if (userInput == "Run")
                 {
-                    Item item = ChooseItem(new List<Item>() { Item.weirdPotion1, Item.weirdPotion2 });
+                    Item item = ChooseItem(new List<Item>() { Item.weirdPotion1, Item.weirdPotion2, Item.weirdPotion3, Item.weirdPotion4, Item.weirdPotion5, Item.weirdPotion6 });
                     Player.Inventory.Add(item);
 
                     Console.WriteLine("You and " + Player.player2.name + " walk on the beach, occationally splashing water at one another. As you're walking, one of you trip over a bottle in the sand. Ah! a potion...I wonder what it does...");

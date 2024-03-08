@@ -80,13 +80,7 @@ namespace Console_RPG
         }
         public override void Use(Entity user, Entity target)
         {
-            this.durability = this.durability -= 0.5f;
-
-            if (this.durability < 0)
-            {
-                Console.WriteLine($"{this.name} has broken!");
-                Player.Inventory.Remove(this);
-            }
+          
         }
     }
 
@@ -120,13 +114,7 @@ namespace Console_RPG
 
         public override void Use(Entity user, Entity target)
         {
-            this.durability = this.durability -= 0.5f;
-
-            if (this.durability < 0)
-            {
-                Console.WriteLine($"{this.name} has broken!");
-                Player.Inventory.Remove(this);
-            }
+            
         }
     }
 }

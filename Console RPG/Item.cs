@@ -11,8 +11,26 @@ namespace Console_RPG
         public static Item water = new Water("Water", "Water!", 10, 5, 10);
         public static Item weirdPotion1 = new WeirdPotionHealItem("Weird Potion", "It kind of smells funny...", 10, 5, 15);
         public static Item weirdPotion2 = new WeirdPotionDamageItem("Weird Potion", "It kind of smells funny...", 10, 5, 15);
+        public static Item weirdPotion3 = new WeirdPotionHealItem("Weird Potion", "It kind of smells funny...", 10, 5, 15);
+        public static Item weirdPotion4 = new WeirdPotionDamageItem("Weird Potion", "It kind of smells funny...", 10, 5, 15);
+        public static Item weirdPotion5 = new WeirdPotionHealItem("Weird Potion", "It kind of smells funny...", 10, 5, 15);
+        public static Item weirdPotion6 = new WeirdPotionDamageItem("Weird Potion", "It kind of smells funny...", 10, 5, 15);
 
         // Potions
+
+        public static Item healthPotion = new HealthPotionItem("Health Potion", "Yummy", 10, 2, 10);
+        public static Item manaPotion = new ManaPotionItem("Standard Ether Potion", "Yummy", 10, 2, 5);
+        public static Item healthPotionE = new HealthPotionItem("Health Potion", "Yummy", 10, 2, 10);
+        public static Item manaPotionE = new ManaPotionItem("Standard Ether Potion", "Yummy", 10, 2, 5);
+
+        public static Item healthPotionr = new HealthPotionItem("Health Potion", "Yummy", 10, 2, 10);
+        public static Item manaPotionr = new ManaPotionItem("Standard Ether Potion", "Yummy", 10, 2, 5);
+        public static Item healthPotionrr = new HealthPotionItem("Health Potion", "Yummy", 10, 2, 10);
+        public static Item manaPotionrr = new ManaPotionItem("Standard Ether Potion", "Yummy", 10, 2, 5);
+        public static Item healthPotionrrr = new HealthPotionItem("Health Potion", "Yummy", 10, 2, 10);
+        public static Item manaPotionrrr = new ManaPotionItem("Standard Ether Potion", "Yummy", 10, 2, 5);
+
+
         public static Item healthPotion1 = new HealthPotionItem("Health Potion", "Yummy", 10, 2, 10);
         public static Item healthPotion2 = new HealthPotionItem("Health Potion", "Yummy", 10, 2, 10);
         public static Item healthPotion3 = new HealthPotionItem("Health Potion", "Yummy", 10, 2, 10);
@@ -27,6 +45,11 @@ namespace Console_RPG
         public static Item megaManaPotion2 = new ManaPotionItem("Mega Ether Potion", "Yummy", 25, 2, 25);
         public static Item megaManaPotion3 = new ManaPotionItem("Mega Ether Potion", "Yummy", 25, 2, 25);
 
+        public static Item godManaPotion1 = new GodManaPotionItem("God Mana Potion", "Don't use unless you really need to... [Easy Mode]", 25, 2, 500);
+        public static Item godManaPotion2 = new GodManaPotionItem("God Mana Potion", "Don't use unless you really need to... [Easy Mode]", 25, 2, 500);
+        public static Item godHealthPotion1 = new GodHealthPotionItem("God Health Potion", "Don't use unless you really need to... [Easy Mode]", 25, 2, 500);
+        public static Item godHealthPotion2 = new GodHealthPotionItem("God Health Potion", "Don't use unless you really need to... [Easy Mode]", 25, 2, 500);
+
         //Weapons
         public static Equipment dagger = new Weapon("Dagger", "Sharp...ish", 20, 5, 0.5f, 1, 10);
         public static Equipment sword = new Weapon("Sword", "Sharp enough!", 100, 5, 0.5f, 1, 25);
@@ -34,13 +57,13 @@ namespace Console_RPG
         public static Equipment staff = new MagicWeapon("Staff", "Wow! Crystal", 100, 5, 0.5f, 1, 25);
 
         public static Equipment godSword = new Weapon("God Sword", "Don't use unless you really need to... [Easy Mode]", 20, 5, 0.5f, 1, 100);
-        public static Equipment godSword2 = new Weapon("God Sword 2", "Don't use unless you really need to...", 20, 5, 0.5f, 1, 100);
+        public static Equipment godSword2 = new Weapon("God Sword 2", "Don't use unless you really need to... [Easy Mode]", 20, 5, 0.5f, 1, 100);
 
         //Armor
         public static Equipment chainmail = new Armor("Chainmail", "There's a lot of holes, but it's better than nothing", 10, 5, 0.5f, 1, 10);
-        public static Equipment ironArmor = new Armor("Iron Armor", "Woo. Shiny!", 10, 5, 0.5f, 1, 20);
+        public static Equipment ironArmor = new Armor("Iron Armor", "Woo. Shiny!", 100, 5, 0.5f, 1, 25);
         public static Equipment robes = new Armor("Robes", "It's too big for you, but it works", 10, 5, 0.5f, 1, 10);
-        public static Equipment fancyRobes = new Armor("Sorcerers Robes", "It's quite fancy", 10, 5, 0.5f, 1, 20);
+        public static Equipment fancyRobes = new Armor("Sorcerers Robes", "It's quite fancy", 100, 5, 0.5f, 1, 25);
 
         public string name;
         public string description;
@@ -123,6 +146,23 @@ namespace Console_RPG
             Console.WriteLine(" ");
         }
     }
+
+    class GodHealthPotionItem : Item
+    {
+        public int healAmount;
+
+        public GodHealthPotionItem(string name, string description, int shopPrice, int maxAmount, int healAmount) : base(name, description, shopPrice, maxAmount)
+        {
+            this.healAmount = healAmount;
+        }
+
+        public override void Use(Entity user, Entity target)
+        {
+            user.currentHP = this.healAmount;
+            Console.WriteLine(target.name + " used a Health Potion and healed for " + this.healAmount + "!");
+            Console.WriteLine(" ");
+        }
+    }
     class ManaPotionItem : Item
     {
         public int manaAmount;
@@ -138,18 +178,19 @@ namespace Console_RPG
         }
     }
 
-    class Firework : Item
+    class GodManaPotionItem : Item
     {
-        public int damage;
+        public int manaAmount;
 
-        public Firework(string name, string description, int shopPrice, int maxAmount, int damage) : base(name, description, shopPrice, maxAmount)
+        public GodManaPotionItem(string name, string description, int shopPrice, int maxAmount, int manaAmount) : base(name, description, shopPrice, maxAmount)
         {
-            this.damage = damage;
+            this.manaAmount = manaAmount;
         }
 
         public override void Use(Entity user, Entity target)
         {
-            target.currentHP -= this.damage;
+            user.currentMana = this.manaAmount;
         }
     }
+
 }

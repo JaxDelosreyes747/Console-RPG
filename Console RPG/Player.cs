@@ -9,17 +9,17 @@ namespace Console_RPG
     class Player : Entity
     {
 
-        public static List<Item> Inventory = new List<Item>() {};
-        public static List<Equipment> EquipmentInventory = new List<Equipment>() {};
+        public static List<Item> Inventory = new List<Item>() {Item.healthPotion, Item.manaPotion, Item.healthPotionE, Item.manaPotionE, Item.godHealthPotion1, Item.godHealthPotion2, Item.godManaPotion1, Item.godManaPotion2};
+        public static List<Equipment> EquipmentInventory = new List<Equipment>() {Weapon.godSword, Weapon.godSword2};
         public static int CoinCount = 0;
 
-        public static Player player1 = new Player(name: "", hp: 20, mana: 30, new Stats(strength: 5, defense: 2, maxhp: 20, maxmana: 30, spellstrength: 20), level: 1, currentexp: 0);
-        public static Player player2 = new Player(name: "", hp: 20, mana: 30, new Stats(strength: 5, defense: 2, maxhp: 20, maxmana: 30, spellstrength: 20), level: 1, currentexp: 0);
+        public static Player player1 = new Player(name: "", hp: 20, mana: 30, new Stats(strength: 5, defense: 5, maxhp: 20, maxmana: 30, spellstrength: 20), level: 1, currentexp: 0);
+        public static Player player2 = new Player(name: "", hp: 20, mana: 30, new Stats(strength: 5, defense: 5, maxhp: 20, maxmana: 30, spellstrength: 20), level: 1, currentexp: 0);
         
         public int level;
         public int currentExp;
 
-        public Stats levelUpIncrease = new Stats(3, 2, 10, 5, 5);
+        public Stats levelUpIncrease = new Stats(5, 5, 10, 5, 5);
 
         public Player(string name, int hp, int mana, Stats stats, int level, int currentexp) : base(name, hp, mana, stats)
         {
@@ -74,7 +74,7 @@ namespace Console_RPG
             // Iterate through each of the choices
             for (int i = 0; i < choices.Count; i++)
             {
-                Console.WriteLine($"{i + 1}: {choices[i].name}");
+                Console.WriteLine($"{i + 1}: {choices[i].name}. {choices[i].description} ({choices[i].shopPrice} Derek Dollars)");
             }
 
             // Let user pick a choice
@@ -137,7 +137,7 @@ namespace Console_RPG
         {
             int strengthTotalDamage = (this.stats.strength - target.stats.defense);
             int spellTotalDamage = (this.stats.spellStrength / 2);
-            int mana = this.stats.maxMana - 30;
+            int mana = this.stats.maxMana - 5;
             this.currentMana = mana;
 
             if (mana > 0)
@@ -149,6 +149,7 @@ namespace Console_RPG
                     Console.WriteLine(this.name + " attacked " + target.name + " for " + spellTotalDamage + "points of spell damage!");
                     Console.WriteLine(" ");
                     Console.WriteLine($"{this.name}'s mana is at {this.currentMana}");
+                    Console.WriteLine(" ");
                 }
                 else
                 {
